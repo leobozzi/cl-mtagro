@@ -218,7 +218,7 @@
     ],
 
     'git-repos': [
-        'https://github.com/leobozzi/mtadro.git',
+        'https://github.com/leobozzi/cl-mtagro.git',
         'https://github.com/leobozzi/odoo-addons-utils.git',
         'https://github.com/leobozzi/enterprise.git',
         #'https://github.com/vangrow/account-modules.git',
