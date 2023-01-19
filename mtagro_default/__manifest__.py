@@ -115,7 +115,7 @@
 
     ],
     'data': [
-        #'views/res_partner.xml',
+        #
     ],
     'test': [
     ],
