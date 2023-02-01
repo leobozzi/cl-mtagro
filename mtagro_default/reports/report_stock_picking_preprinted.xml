@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Internal Move design -->
+        <template id="report_preprinted_internal_move">
+            <div class="page" style="zoom:1.25;font-size:1em;">
+                <div id="item_box">
+                    <table class="tabel table-sm o_main_table" name="invoice_line_table"
+                        style="font-size:12px;" t-if="o.move_ids_without_package">
+                        <thead>
+                            <tr>
+                                <th name="th_product" class="text-right">
+                                    <span>Description</span>
+                                </th>
+                                <th name="th_qty_done" class="text-right">
+                                    <span>Cantidad</span>
+                                </th>
+                                <th name="th_default_code" class="text-right">
+                                    <span>Código</span>
+                                </th>
+                                <th name="th_product_id" class="text-right">
+                                    <span>Producto</span>
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-as="line" t-foreach="o.move_ids_without_package">
+                                <tr>
+                                    <td>
+                                        <span t-field="line.description_picking" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.product_uom_qty" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.product_id.default_code" />
+                                    </td>
+                                    <td>
+                                        <span style="overflow:hidden;white-space: nowrap;"
+                                            t-field="line.product_id" />
+                                    </td>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div
+                style="width:160mm;position:absolute; left:25mm;top:130mm;height:10mm; overflow:hidden;"
+                t-field="o.note" />
+        </template>
+
+        <!-- Internal Header design -->
+        <template id="report_preprinted_internal_header">
+            <div class="page" style="zoom:1.25;font-size:1em;">
+                <div t-if="o.partner_id" name="partner_header" style="position:absolute;">
+                    <span style="position:absolute;left:90mm;top:5mm;width:130mm;">DOCUMENTO NO
+                        VÁLIDO COMO FACTURA</span>
+                    <span style="position:absolute;left:190mm;top:15mm;width:130mm;font-size:1em;">
+                        <span>Fecha:</span>
+                        <a t-field="o.date_done" />
+                    </span>
+                    <!--
+                    <span
+                    style="position:absolute;left:155mm;top:10mm;width:130mm;font-size:1em;">
+                    <a>Remito Nro.: </a>
+                        <t t-as="voucher"
+                    t-foreach="o.voucher_ids">
+                            <a t-field="voucher.name"
+                    />
+                        </t>
+                    </span>
+                    -->
+                    <!-- (14) Apellido uy Nombre: Denominicacion o Razon Soclial -->
+                    <strong>Cliente: </strong>
+                    <span t-field="o.partner_id.commercial_partner_id.name" />
+
+                    <!-- (15) Domicilio Comercial -->
+                    <br />
+                    <span t-field="o.partner_id"
+                        t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': true, 'no_tag_br': True}" />
+
+                    <!-- (16) Responsabilidad AFIP -->
+                    <span t-field="o.partner_id.l10n_ar_afip_responsibility_type_id" />
+
+                    <!-- (17) CUIT -->
+                    <t
+                        t-if="o.partner_id.vat and o.partner_id.l10n_latam_identification_type_id and o.partner_id.l10n_latam_identification_type_id.l10n_ar_afip_code != '99'">
+                        <br />
+                        <strong>
+                            <t
+                                t-esc="o.partner_id.l10n_latam_identification_type_id.name or o.company_id.account_fiscal_country_id.vat_label"
+                                id="inv_tax_id_label" /> : </strong>
+                        <span
+                            t-esc="o.partner_id.l10n_ar_formatted_vat if o.partner_id.l10n_latam_identification_type_id.is_vat else o.partner_id.vat" />
+                    </t>
+                    <br />
+                    <br />
+                    <span style="font-size:1em;font-weight:bold;">Doc. Origen:</span>
+                    <span t-field="o.origin" />
+                    <br />
+                    <span style="font-size:1em;font-weight:bold;">Medio de Transporte:</span>
+                    <span t-field="o.partner_id.ref" />
+                </div>
+                <div t-if="o.move_line_ids_without_package" name="move_line"
+                    style="position:absolute;left:10mm;top:50mm;">
+                    <t t-call="mtagro_default.report_preprinted_internal_move" />
+                </div>
+            </div>
+        </template>
+
+        <!-- Template -->
+        <template id="report_stock_picking_preprinted">
+            <t t-call="web.html_container">
+                <t t-as="o" t-foreach="docs">
+                    <t t-set="lang" t-value="o.partner_id.lang" />
+                    <t t-set="print_with_payments" t-value="False" />
+                    <t t-call="mtagro_default.report_preprinted_internal_header" t-lang="lang" />
+                </t>
+            </t>
+        </template>
+
+
+        <!-- Add report -->
+        <report id="mtagro_report_stock_picking_preprinted" model="stock.picking"
+            name="mtagro_default.report_stock_picking_preprinted" report_type="qweb-pdf"
+            string="Preimpreso" />
+
+    </data>
+</odoo>

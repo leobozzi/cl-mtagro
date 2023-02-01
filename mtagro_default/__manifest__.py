@@ -104,7 +104,7 @@
         # Utils
         'web_search_with_and',
         'web_advanced_search',
-        'auto_backup',
+        #'auto_backup',
         'mass_editing',
         'filter_multi_user',
         'web_refresher',
@@ -115,7 +115,10 @@
 
     ],
     'data': [
-        #
+        'views/account_move_view.xml',
+        'reports/report_invoice_liquidacion.xml',
+        'reports/report_stock_picking_preprinted.xml',
+
     ],
     'test': [
     ],
@@ -243,7 +246,7 @@
         'https://github.com/OCA/bank-statement-import oca-bank-statement-import',
         'https://github.com/OCA/brand oca-brand',
         # 'https://github.com/OCA/business-requirement oca-business-requirement',
-        # 'https://github.com/OCA/commission oca-commission',
+        'https://github.com/OCA/commission oca-commission',
         # 'https://github.com/OCA/contract oca-contract',
         'https://github.com/OCA/credit-control oca-credit-control',
         'https://github.com/OCA/crm oca-crm',
