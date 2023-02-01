@@ -6,43 +6,42 @@
         <template id="report_preprinted_internal_move">
             <div class="page" style="zoom:1.25;font-size:1em;">
                 <div id="item_box">
-                    <table class="tabel table-sm o_main_table" name="invoice_line_table"
-                        style="font-size:12px;" t-if="o.move_ids_without_package">
-                        <thead>
+                    <table class="table o_main_table" style="width: 100%; border: 1px solid; border-collapse: collapse;" name="invoice_line_table" t-if="o.move_ids_without_package">
+                        <thead style="text-align: left;">
                             <tr>
-                                <th name="th_product" class="text-right">
+                                <th name="th_default_code" style="border: 1px solid;">
+                                    <span>Codigo</span>
+                                </th>
+                                <th name="th_product" style="border: 1px solid;">
                                     <span>Description</span>
-                                </th>
-                                <th name="th_qty_done" class="text-right">
-                                    <span>Cantidad</span>
-                                </th>
-                                <th name="th_default_code" class="text-right">
-                                    <span>Código</span>
-                                </th>
-                                <th name="th_product_id" class="text-right">
+                                </th>      
+                                <!--                  
+                                <th name="th_product_id" style="border: 1px solid;">
                                     <span>Producto</span>
                                 </th>
-                                
+                                -->
+                                <th name="th_qty_done" style="border: 1px solid;">
+                                    <span>Cantidad</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-as="line" t-foreach="o.move_ids_without_package">
                                 <tr>
-                                    <td>
-                                        <span t-field="line.description_picking" />
-                                    </td>
-                                    <td>
-                                        <span t-field="line.product_uom_qty" />
-                                    </td>
-                                    <td>
+                                    <td style="border-right: 1px solid;">
                                         <span t-field="line.product_id.default_code" />
                                     </td>
-                                    <td>
+                                    <td style="border-right: 1px solid;">
+                                        <span t-field="line.description_picking" />
+                                    </td>
+                                    <!--
+                                    <td style="border-right: 1px solid;">
                                         <span style="overflow:hidden;white-space: nowrap;"
                                             t-field="line.product_id" />
                                     </td>
-                                    <td>
-                                        <span></span>
+                                    -->
+                                    <td style="border-right: 1px solid;">
+                                        <span t-field="line.product_uom_qty" />
                                     </td>
                                 </tr>
                             </t>
@@ -59,7 +58,7 @@
         <template id="report_preprinted_internal_header">
             <div class="page" style="zoom:1.25;font-size:1em;">
                 <div t-if="o.partner_id" name="partner_header" style="position:absolute;">
-                    <span style="position:absolute;left:90mm;top:5mm;width:130mm;">DOCUMENTO NO
+                    <span style="position:absolute;left:90mm;top:0mm;width:130mm;">DOCUMENTO NO
                         VÁLIDO COMO FACTURA</span>
                     <span style="position:absolute;left:190mm;top:15mm;width:130mm;font-size:1em;">
                         <span>Fecha:</span>
