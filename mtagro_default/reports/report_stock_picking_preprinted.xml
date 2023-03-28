@@ -4,9 +4,9 @@
 
         <!-- Internal Move design -->
         <template id="report_preprinted_internal_move">
-            <div class="page" style="zoom:1.25;font-size:1em;">
+            <div class="page" style="zoom:1.25;font-size:0.8em;">
                 <div id="item_box">
-                    <table class="table o_main_table" style="width: 100%; border: 1px solid; border-collapse: collapse;" name="invoice_line_table" t-if="o.move_ids_without_package">
+                    <table class="table o_main_table" style="width: 100%; border: 1px solid; border-collapse: collapse; font-size:1em;" name="invoice_line_table" t-if="o.move_ids_without_package">
                         <thead style="text-align: left;">
                             <tr>
                                 <th name="th_default_code" style="border: 1px solid;">
@@ -56,14 +56,22 @@
 
         <!-- Internal Header design -->
         <template id="report_preprinted_internal_header">
-            <div class="page" style="zoom:1.25;font-size:1em;">
+            <div class="header">
+                <span style="position:absolute;left:240mm;top:25mm;width:130mm;font-size:1.5em;">
+                    <span>Fecha:</span>
+                    <a t-field="o.date_done" />
+                </span>
+            </div>
+            <div class="page" style="zoom:1.25;font-size:0.9em;">
                 <div t-if="o.partner_id" name="partner_header" style="position:absolute;">
                     <span style="position:absolute;left:90mm;top:0mm;width:130mm;">DOCUMENTO NO
                         VÁLIDO COMO FACTURA</span>
+                    <!--
                     <span style="position:absolute;left:190mm;top:15mm;width:130mm;font-size:1em;">
-                        <span>Fecha:</span>
+                        <span> </span>
                         <a t-field="o.date_done" />
                     </span>
+                    -->
                     <!--
                     <span
                     style="position:absolute;left:155mm;top:10mm;width:130mm;font-size:1em;">
