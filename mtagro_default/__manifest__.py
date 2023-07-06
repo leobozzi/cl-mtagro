@@ -116,7 +116,6 @@
     ],
     'data': [
         'views/account_move_view.xml',
-        'reports/report_invoice_liquidacion.xml',
         'reports/report_stock_picking_preprinted.xml',
 
     ],
