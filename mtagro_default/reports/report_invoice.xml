@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Factura Electrónica Moneda -->
+        <template id="account_report_invoice_document" inherit_id="account.report_invoice_document">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            
+            <xpath expr="//div[@name='comment']" position="after">
+                <t t-if="o.currency_id == o.company_id.currency_id">
+                    <t t-if="o.l10n_ar_afip_concept != '2'">
+                        <p class="m-0"
+                            t-esc="'Tipo de Cambio: %s %s - Total: USD %s' % (o.currency_id.name,o.usd_currency_rate_agree,o.usd_total_agree)" />
+                    </t>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>
